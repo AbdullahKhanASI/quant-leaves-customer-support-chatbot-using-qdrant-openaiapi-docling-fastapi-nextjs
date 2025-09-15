@@ -1,0 +1,191 @@
+{
+  "company": {
+    "name": "QuantLeaves",
+    "tagline": "Analytics that explain themselves",
+    "founded": 2022,
+    "hq_region": "US",
+    "locales": [
+      "en-US",
+      "en-GB"
+    ],
+    "vertical": "SaaS Analytics"
+  },
+  "products": [
+    {
+      "sku_or_id": "QL-DASH",
+      "name": "Explainable Dashboards",
+      "category": "analytics",
+      "short_desc": "Self-serve BI with natural-language explainers",
+      "compatibility": [
+        "Chrome",
+        "Edge",
+        "Firefox"
+      ],
+      "status": "active"
+    },
+    {
+      "sku_or_id": "QL-API",
+      "name": "Metrics API",
+      "category": "api",
+      "short_desc": "Query metrics programmatically",
+      "compatibility": [
+        "OpenAPI 3.1"
+      ],
+      "status": "active"
+    },
+    {
+      "sku_or_id": "QL-ALERTS",
+      "name": "Anomaly Alerts",
+      "category": "alerts",
+      "short_desc": "Threshold and ML-based anomaly notifications",
+      "compatibility": [
+        "Email",
+        "Slack",
+        "Webhook"
+      ],
+      "status": "active"
+    }
+  ],
+  "plans": [
+    {
+      "name": "Starter",
+      "price": "$29",
+      "billing_cycle": "monthly",
+      "features": [
+        "Dashboards",
+        "Standard Connectors"
+      ],
+      "limits": {
+        "users": 3,
+        "api_calls": 20000,
+        "dashboards": 10
+      },
+      "entitlements": [
+        "email_support"
+      ]
+    },
+    {
+      "name": "Pro",
+      "price": "$199",
+      "billing_cycle": "monthly",
+      "features": [
+        "Dashboards",
+        "Metrics API",
+        "Anomaly Alerts"
+      ],
+      "limits": {
+        "users": 50,
+        "api_calls": 600000,
+        "dashboards": 100
+      },
+      "entitlements": [
+        "sso",
+        "priority_support"
+      ]
+    },
+    {
+      "name": "Enterprise",
+      "price": "$999",
+      "billing_cycle": "monthly",
+      "features": [
+        "Dashboards",
+        "Metrics API",
+        "Anomaly Alerts",
+        "Private Cluster"
+      ],
+      "limits": {
+        "users": 500,
+        "api_calls": 2000000,
+        "dashboards": 1000
+      },
+      "entitlements": [
+        "sso",
+        "priority_support",
+        "dedicated_csm",
+        "custom_sla"
+      ]
+    }
+  ],
+  "policies": {
+    "sla": {
+      "version": "v1.0",
+      "effective_date": "2025-07-01",
+      "uptime": "99.9%"
+    },
+    "refunds": {
+      "version": "v1.0",
+      "effective_date": "2025-07-01",
+      "claim_window_days": 30
+    },
+    "privacy": {
+      "version": "v1.0",
+      "effective_date": "2025-07-01",
+      "pii": false
+    },
+    "warranty": {
+      "version": "v1.0",
+      "effective_date": "2025-07-01"
+    }
+  },
+  "operations": {
+    "support_hours": "24/5",
+    "escalation_tiers": [
+      "L1",
+      "L2",
+      "L3"
+    ]
+  },
+  "api": {
+    "base_url": "https://api.quantleaves.com",
+    "auth": "Bearer",
+    "rate_limits": {
+      "Starter": "60/min",
+      "Pro": "600/min",
+      "Enterprise": "2000/min"
+    }
+  },
+  "glossary": [
+    {
+      "term": "Attribution Window",
+      "definition": "Period used to credit conversions to a touchpoint"
+    },
+    {
+      "term": "Uptime",
+      "definition": "Percentage of time service is available"
+    }
+  ],
+  "regions": [
+    "US",
+    "EU"
+  ],
+  "compliance": [
+    "SOC 2",
+    "ISO 27001"
+  ],
+  "error_codes": [
+    {
+      "code": "E1001",
+      "message": "Auth token missing",
+      "cause": "No Authorization header",
+      "fix": "Provide Bearer token"
+    },
+    {
+      "code": "E1002",
+      "message": "Rate limit exceeded",
+      "cause": "Too many requests",
+      "fix": "Throttle or upgrade plan"
+    },
+    {
+      "code": "E2001",
+      "message": "Invalid metric id",
+      "cause": "Unknown metric",
+      "fix": "List metrics then retry"
+    },
+    {
+      "code": "E3001",
+      "message": "Plan limit exceeded",
+      "cause": "Users or dashboards over limit",
+      "fix": "Remove seats or upgrade"
+    }
+  ]
+}

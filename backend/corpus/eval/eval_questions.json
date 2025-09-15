@@ -1,0 +1,181 @@
+[
+  {
+    "question": "Do you support SSO password resets?",
+    "expected_answer": "SSO resets must be done via the identity provider; QuantLeaves reset links will not work.",
+    "source_doc_ids": [
+      "KB-0001",
+      "RB-0001",
+      "MAC-0001"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "What are the API rate limits per plan?",
+    "expected_answer": "Starter 60/min, Pro 600/min, Enterprise 2000/min.",
+    "source_doc_ids": [
+      "KB-0003",
+      "openapi.yaml",
+      "KB-0004"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "How do I connect Postgres as a data source?",
+    "expected_answer": "Settings \u2192 Connections \u2192 Add source \u2192 Postgres \u2192 enter read-only creds \u2192 Test \u2192 Save.",
+    "source_doc_ids": [
+      "KB-0002"
+    ],
+    "strictness": "fuzzy"
+  },
+  {
+    "question": "Can I export dashboard data as CSV?",
+    "expected_answer": "Yes, via UI Export \u2192 CSV, or Metrics API GET /v1/metrics.",
+    "source_doc_ids": [
+      "KB-0005"
+    ],
+    "strictness": "fuzzy"
+  },
+  {
+    "question": "Which plans include SSO?",
+    "expected_answer": "Pro and Enterprise.",
+    "source_doc_ids": [
+      "KB-0001",
+      "KB-0004",
+      "plan_matrix.csv"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "What\u2019s your uptime SLA and how do credits work?",
+    "expected_answer": "99.9% monthly uptime; credits 10% (<99.9%), 25% (<99.0%), 50% (<98.0%); claim within 30 days.",
+    "source_doc_ids": [
+      "POL-0001"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "Do you provide refunds on cancellations?",
+    "expected_answer": "Cancellations end at term; refunds limited to SLA credits; disputes within 30 days.",
+    "source_doc_ids": [
+      "POL-0002"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "I\u2019m getting E1002. What should I do?",
+    "expected_answer": "Throttle or batch requests, check retry headers, or upgrade plan.",
+    "source_doc_ids": [
+      "KB-0003",
+      "RB-0002",
+      "error_codes.json"
+    ],
+    "strictness": "fuzzy"
+  },
+  {
+    "question": "How many users can Starter support?",
+    "expected_answer": "Up to 3 users.",
+    "source_doc_ids": [
+      "plan_matrix.csv",
+      "KB-0004"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "Do you have priority support on Pro?",
+    "expected_answer": "Yes, Pro includes priority_support.",
+    "source_doc_ids": [
+      "plan_matrix.csv",
+      "KB-0004"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "What\u2019s the base URL and auth scheme for the API?",
+    "expected_answer": "https://api.quantleaves.com with Bearer token auth.",
+    "source_doc_ids": [
+      "openapi.yaml",
+      "KB-0005",
+      "world_bible.json"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "How do I claim an SLA credit?",
+    "expected_answer": "Open a ticket titled 'SLA Credit Request \u2014 <Month>' with incident times; finance applies credit next invoice.",
+    "source_doc_ids": [
+      "POL-0001"
+    ],
+    "strictness": "fuzzy"
+  },
+  {
+    "question": "Why isn\u2019t my reset email arriving?",
+    "expected_answer": "Check spam, confirm primary email, verify seat is active and within plan user limit.",
+    "source_doc_ids": [
+      "KB-0001",
+      "RB-0001"
+    ],
+    "strictness": "fuzzy"
+  },
+  {
+    "question": "Can I get anomaly alerts to Slack?",
+    "expected_answer": "Yes, QL-ALERTS supports Email, Slack, and Webhook.",
+    "source_doc_ids": [
+      "products.csv",
+      "KB-0004"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "What happens if we exceed dashboard limits?",
+    "expected_answer": "Features may be restricted until you remove dashboards or upgrade.",
+    "source_doc_ids": [
+      "POL-0002",
+      "plan_matrix.csv"
+    ],
+    "strictness": "fuzzy"
+  },
+  {
+    "question": "What is E3001?",
+    "expected_answer": "Plan limit exceeded (users or dashboards); remove seats/dashboards or upgrade.",
+    "source_doc_ids": [
+      "error_codes.json",
+      "KB-0004"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "Which browsers are supported for dashboards?",
+    "expected_answer": "Chrome, Edge, Firefox.",
+    "source_doc_ids": [
+      "products.csv",
+      "world_bible.json"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "How do I list valid metrics before querying?",
+    "expected_answer": "Call GET /v1/metrics without parameters to list available metrics.",
+    "source_doc_ids": [
+      "openapi.yaml"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "What are your support hours?",
+    "expected_answer": "24/5.",
+    "source_doc_ids": [
+      "world_bible.json",
+      "POL-0001"
+    ],
+    "strictness": "exact"
+  },
+  {
+    "question": "Do you have custom SLAs?",
+    "expected_answer": "Yes, available on Enterprise.",
+    "source_doc_ids": [
+      "plan_matrix.csv",
+      "KB-0004"
+    ],
+    "strictness": "exact"
+  }
+]

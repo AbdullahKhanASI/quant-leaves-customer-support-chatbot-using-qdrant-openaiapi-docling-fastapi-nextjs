@@ -1,0 +1,4 @@
+sku,name,category,short_desc,compatibility,status
+QL-DASH,Explainable Dashboards,analytics,Self-serve BI with explainers,"Chrome;Edge;Firefox",active
+QL-API,Metrics API,api,Query metrics programmatically,"OpenAPI 3.1",active
+QL-ALERTS,Anomaly Alerts,alerts,Threshold and ML anomalies,"Email;Slack;Webhook",active

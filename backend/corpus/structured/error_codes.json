@@ -1,0 +1,34 @@
+[
+  {
+    "code": "E1001",
+    "message": "Auth token missing",
+    "cause": "No Authorization header",
+    "fix": "Provide Bearer token",
+    "severity": "error",
+    "service": "auth"
+  },
+  {
+    "code": "E1002",
+    "message": "Rate limit exceeded",
+    "cause": "Too many requests",
+    "fix": "Throttle requests or upgrade plan",
+    "severity": "warn",
+    "service": "api_gateway"
+  },
+  {
+    "code": "E2001",
+    "message": "Invalid metric id",
+    "cause": "Unknown metric",
+    "fix": "GET /v1/metrics to list valid ids, then retry",
+    "severity": "error",
+    "service": "metrics"
+  },
+  {
+    "code": "E3001",
+    "message": "Plan limit exceeded",
+    "cause": "Users or dashboards over limit",
+    "fix": "Remove seats/dashboards or upgrade plan",
+    "severity": "error",
+    "service": "billing"
+  }
+]

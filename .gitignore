@@ -1,0 +1,177 @@
+# Python
+backend/.venv/
+backend/.python-version
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pip-log.txt
+pip-delete-this-directory.txt
+.mypy_cache/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+
+# uv cache
+.uv-cache/
+
+# Node.js
+frontend/node_modules/
+frontend/.next/
+frontend/.turbo/
+frontend/.env.local
+frontend/.env.local.example
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+.npm
+.eslintcache
+.stylelintcache
+.rpt2_cache/
+.rts2_cache_cjs/
+.rts2_cache_es/
+.rts2_cache_umd/
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Nuxt.js
+.nuxt
+dist
+
+# Logs
+*.log
+logs
+backend_uvicorn.log
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Environment files
+*.env
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
+.env
+.env.*
+backend/*.env
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.vscode/
+.idea/
+
+# Qdrant
+qdrant_storage/
+qdrant_data/
+*.qdrant
+
+# Vector databases and embeddings
+embeddings/
+vector_data/
+vectors/
+
+# AI/ML models and data
+models/
+checkpoints/
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.pth
+*.onnx
+
+# FastAPI
+.pytest_cache/
+instance/
+.webassets-cache
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Documentation builds
+docs/_build/
+site/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Project specific
+backend.log
+corpus/processed/
+corpus/embeddings/
+uploads/
+downloads/
+
+# Docker
+.dockerignore
+docker-compose.override.yml
+
+# Local development
+.env.production
+.env.staging
+.env.test
+
+# Backup files
+*.bak
+*.backup
+*.orig
+
+# Runtime data
+runtime/
+data/
+storage/
+
+# Generated documentation
+docs/generated/

@@ -1,0 +1,4 @@
+plan,monthly_price,annual_price,users_limit,api_calls_limit,dashboards_limit,entitlements
+Starter,29,290,3,20000,10,"email_support"
+Pro,199,1990,50,600000,100,"sso;priority_support"
+Enterprise,999,9990,500,2000000,1000,"sso;priority_support;dedicated_csm;custom_sla"
