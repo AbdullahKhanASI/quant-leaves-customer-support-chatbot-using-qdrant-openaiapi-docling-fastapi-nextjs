@@ -2,10 +2,68 @@
 
 A modern, AI-powered customer support chatbot built using **RAG (Retrieval-Augmented Generation)** technology. This project combines a powerful FastAPI backend with a sleek Next.js frontend to deliver intelligent, context-aware responses based on your knowledge base.
 
+## ⚡ Quick Start (Docker Compose - Recommended)
+
+```bash
+# 1. Clone the repository
+git clone <repo-url>
+cd saas-analytics-customer-support-chatbot
+
+# 2. Configure backend environment
+cd backend
+cp .env.example .env
+# Edit .env and add your OPENAI_API_KEY
+
+# 3. Run knowledge base ingestion (one-time setup)
+UV_CACHE_DIR=../.uv-cache uv venv && source .venv/bin/activate
+UV_CACHE_DIR=../.uv-cache uv sync
+uv run python -m ingest
+
+# 4. Start all services with Docker Compose
+cd ..
+docker-compose up
+
+# 5. Open http://localhost:3000 and try the chat widget!
+```
+
+**Services will be available at:**
+- 🌐 **Frontend**: http://localhost:3000
+- 🔌 **Backend API**: http://localhost:8000
+- 🗄️ **PostgreSQL**: localhost:5433
+
+## 🚀 Alternative: Manual Setup
+
+For development or if you prefer running services individually:
+
+```bash
+# 1. Clone and setup
+git clone <repo-url>
+cd saas-analytics-customer-support-chatbot
+
+# 2. Start database only
+docker-compose up postgres -d
+
+# 3. Setup backend
+cd backend
+UV_CACHE_DIR=../.uv-cache uv venv && source .venv/bin/activate
+UV_CACHE_DIR=../.uv-cache uv sync
+cp .env.example .env  # Add your OPENAI_API_KEY
+uv run python -m ingest  # Setup knowledge base
+uv run uvicorn app.main:app --reload --host 0.0.0.0 --port 8000 &
+
+# 4. Setup frontend
+cd ../frontend
+pnpm install
+pnpm run dev
+
+# 5. Open http://localhost:3000 and click "Try the Chat Widget"
+```
+
 ## 🚀 Features
 
-### 🤖 Intelligent Chat Interface
-- **Conversational UI** - Modern chat interface with message history
+### 🤖 Intelligent Chat Widget
+- **Modal Widget Interface** - Compact, embeddable chat widget with modern design
+- **Landing Page** - Professional homepage with widget demonstration
 - **Real-time Responses** - Instant AI-powered responses to customer queries
 - **Typing Indicators** - Visual feedback during response generation
 - **Message Citations** - Shows sources and references for transparency
@@ -47,13 +105,18 @@ A modern, AI-powered customer support chatbot built using **RAG (Retrieval-Augme
 
 ## 📋 Prerequisites
 
-Before running this project locally, ensure you have:
+Before running this project, ensure you have:
 
-- **Python 3.11+** installed
-- **Node.js 18+** and **pnpm** installed
-- **PostgreSQL** database with pgvector extension
+### Required for Docker Compose (Recommended)
+- **Docker** and **Docker Compose** installed
 - **OpenAI API key** for GPT access
 - **Git** for version control
+- **Python 3.11+** (for initial knowledge base ingestion)
+- **uv** Python package manager (`pip install uv`)
+
+### Additional for Manual Setup
+- **Node.js 18+** and **pnpm** installed
+- **PostgreSQL** (or use Docker for database only)
 
 ## 🚀 Local Development Setup
 
@@ -64,7 +127,23 @@ git clone https://github.com/AbdullahKhanASI/quant-leaves-customer-support-chatb
 cd quant-leaves-customer-support-chatbot-using-qdrant-openaiapi-docling-fastapi-nextjs
 ```
 
-### 2. Backend Setup
+### 2. Start PostgreSQL Database
+
+```bash
+# Start PostgreSQL with pgvector using Docker Compose
+docker-compose up postgres -d
+
+# Verify database is running
+docker ps | grep quantleaves-postgres
+```
+
+This will start a PostgreSQL container with:
+- **Port**: 5433 (mapped to container's 5432)
+- **Database**: quantleaves
+- **Username/Password**: postgres/postgres
+- **Extensions**: pgvector enabled
+
+### 3. Backend Setup
 
 ```bash
 # Navigate to backend directory
@@ -81,30 +160,18 @@ UV_CACHE_DIR=../.uv-cache uv sync
 cp .env.example .env
 ```
 
-**Configure your `.env` file:**
+**Configure your `backend/.env` file:**
 ```bash
 # Required: OpenAI API configuration
 OPENAI_API_KEY=your_openai_api_key_here
 
-# Required: Database configuration
-DATABASE_URL=postgresql://username:password@localhost:5432/quantleaves_support
+# Required: Database configuration (using Docker container)
+DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5433/quantleaves
 
-# Optional: Qdrant configuration (uses in-memory by default)
-QDRANT_URL=http://localhost:6333
-QDRANT_API_KEY=your_qdrant_api_key_if_needed
-
-# Optional: Logging level
+# Optional: Other settings
+OPENAI_CHAT_MODEL=gpt-4o-mini
+OPENAI_EMBEDDING_MODEL=text-embedding-3-large
 LOG_LEVEL=INFO
-```
-
-### 3. Database Setup
-
-```bash
-# Start PostgreSQL and create database
-createdb quantleaves_support
-
-# Enable pgvector extension
-psql quantleaves_support -c "CREATE EXTENSION IF NOT EXISTS vector;"
 ```
 
 ### 4. Ingest Knowledge Base
@@ -118,6 +185,7 @@ This will:
 - Parse documents from the `corpus/` directory
 - Generate embeddings using OpenAI
 - Store data in PostgreSQL with vector indexing
+- Create all necessary database tables
 
 ### 5. Start Backend Server
 
@@ -159,16 +227,18 @@ Frontend will be available at: http://localhost:3000
 
 ## 🎯 Usage
 
-### Customer Interface
+### Chat Widget Interface
 
 1. **Open the Application**: Navigate to http://localhost:3000
-2. **Start Chatting**: Type your questions in the chat input
-3. **View Responses**: Get AI-powered responses with citations and sources
-4. **Review Citations**: Click on source references to see supporting documentation
+2. **Try the Widget**: Click "Try the Chat Widget" button on the landing page
+3. **Start Chatting**: Type your questions in the modal chat interface
+4. **View Responses**: Get AI-powered responses with citations and sources
+5. **Review Citations**: See source references from the knowledge base
+6. **Close Widget**: Click the X button or click outside the modal
 
 ### Admin Interface
 
-1. **Access Settings**: Click the settings gear icon in the top-right
+1. **Access Settings**: Click "Admin Settings" button on the landing page
 2. **Refresh Knowledge Base**: Use the "Refresh Knowledge Base" button when adding new documents
 3. **Monitor Status**: Check system information and ingestion status
 
@@ -261,19 +331,53 @@ pnpm run build
 pnpm start
 ```
 
-## 🐳 Docker Support
+## 🐳 Docker Compose Setup
 
-Use Docker Compose for easy deployment:
+### Full Stack (Recommended)
+
+Start all services with a single command:
 
 ```bash
-# Start all services
+# Start all services (postgres, backend, frontend)
+docker-compose up
+
+# Start in background (detached mode)
 docker-compose up -d
 
-# View logs
+# View logs for all services
 docker-compose logs -f
 
-# Stop services
+# View logs for specific service
+docker-compose logs -f backend
+docker-compose logs -f frontend
+docker-compose logs -f postgres
+
+# Stop all services
 docker-compose down
+
+# Rebuild and start (after code changes)
+docker-compose up --build
+```
+
+**Service Details:**
+- **PostgreSQL**: ankane/pgvector:latest with vector extensions
+- **Backend**: FastAPI with uv dependency management
+- **Frontend**: Next.js with pnpm package manager
+- **Networking**: Services communicate internally via Docker network
+
+### Database Only (For Development)
+
+If you prefer to run backend and frontend manually:
+
+```bash
+# Start PostgreSQL database only
+docker-compose up postgres -d
+
+# View database logs
+docker-compose logs postgres
+
+# Stop database
+docker-compose stop postgres
 ```
 
 ## 📈 Monitoring and Logging
@@ -306,9 +410,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ### Common Issues
 
 **1. Database Connection Errors**
-- Ensure PostgreSQL is running and accessible
-- Verify DATABASE_URL is correct
-- Check that pgvector extension is installed
+- Ensure PostgreSQL container is running: `docker ps | grep quantleaves-postgres`
+- Restart database if needed: `docker-compose up postgres -d`
+- Verify DATABASE_URL uses port 5433: `postgresql+asyncpg://postgres:postgres@localhost:5433/quantleaves`
+- Check that pgvector extension is enabled (done automatically by container)
 
 **2. OpenAI API Errors**
 - Verify OPENAI_API_KEY is valid
